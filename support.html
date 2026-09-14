@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — SponsorLink</title>
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; background: #F3EEE6; color: #2C2A33;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { text-align: center; margin-bottom: 32px; }
+  header h1 { font-size: 1.6rem; margin: 12px 0 4px; }
+  header p { color: #6b6b6b; margin: 0; }
+  .brand { font-weight: 800; font-size: 1.4rem; }
+  .brand .sponsor { color: #9B87C4; }
+  .brand .link { color: #0B6B3A; }
+  nav.lang { text-align: center; margin-bottom: 28px; }
+  nav.lang a {
+    display: inline-block; padding: 6px 16px; margin: 0 4px; border-radius: 999px;
+    background: #fff; border: 1px solid #ddd; color: #2C2A33; text-decoration: none; font-size: 0.9rem;
+  }
+  nav.lang a.active { background: #9B87C4; color: #fff; border-color: #9B87C4; }
+  section { background: #fff; border-radius: 16px; padding: 20px 24px; margin-bottom: 16px; border: 1px solid #eee; }
+  section h2 { font-size: 1.05rem; margin: 0 0 8px; color: #2C2A33; }
+  section p { margin: 0; color: #4a4a4a; white-space: pre-line; }
+  section a { color: #0B6B3A; font-weight: 600; text-decoration: none; }
+  section a:hover { text-decoration: underline; }
+  [dir="rtl"] { text-align: right; }
+  .updated { text-align: center; color: #9a9a9a; font-size: 0.85rem; margin-top: 28px; }
+  .block-ar { display: none; }
+  body.ar .block-en { display: none; }
+  body.ar .block-ar { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="sponsor">Sponsor</span><span class="link">Link</span></div>
+    <h1 class="block-en">Support</h1>
+    <h1 class="block-ar" dir="rtl">الدعم الفني</h1>
+  </header>
+
+  <nav class="lang">
+    <a href="#" onclick="setLang('en');return false;" id="lang-en" class="active">English</a>
+    <a href="#" onclick="setLang('ar');return false;" id="lang-ar">العربية</a>
+  </nav>
+
+  <div class="block-en">
+    <section>
+      <h2>Need Help?</h2>
+      <p>If you have a question, run into a problem, or want to report an issue with the SponsorLink app, reach out to us directly and we'll get back to you as soon as possible.</p>
+    </section>
+    <section>
+      <h2>Email</h2>
+      <p><a href="mailto:support@sponsorlink.app">support@sponsorlink.app</a></p>
+    </section>
+    <section>
+      <h2>WhatsApp</h2>
+      <p><a href="https://wa.me/966558313972">+966 55 831 3972</a></p>
+    </section>
+    <section>
+      <h2>In the App</h2>
+      <p>You can also reach us directly from the app: open the menu and go to Help &amp; Support.</p>
+    </section>
+  </div>
+
+  <div class="block-ar" dir="rtl">
+    <section>
+      <h2>تحتاج مساعدة؟</h2>
+      <p>إذا كان لديك سؤال، أو واجهت مشكلة، أو تريد الإبلاغ عن خلل في تطبيق SponsorLink، تواصل معنا مباشرة وسنرد عليك في أقرب وقت ممكن.</p>
+    </section>
+    <section>
+      <h2>البريد الإلكتروني</h2>
+      <p><a href="mailto:support@sponsorlink.app">support@sponsorlink.app</a></p>
+    </section>
+    <section>
+      <h2>واتساب</h2>
+      <p><a href="https://wa.me/966558313972">+966 55 831 3972</a></p>
+    </section>
+    <section>
+      <h2>من داخل التطبيق</h2>
+      <p>تقدر تتواصل معنا أيضاً مباشرة من داخل التطبيق: افتح القائمة واذهب إلى المساعدة والدعم.</p>
+    </section>
+  </div>
+
+  <p class="updated block-en">SponsorLink Establishment — Kingdom of Saudi Arabia</p>
+  <p class="updated block-ar" dir="rtl">مؤسسة سبونسورلينك — المملكة العربية السعودية</p>
+</div>
+<script>
+function setLang(lang) {
+  document.body.className = lang;
+  document.getElementById('lang-en').className = lang === 'en' ? 'active' : '';
+  document.getElementById('lang-ar').className = lang === 'ar' ? 'active' : '';
+  document.documentElement.lang = lang;
+}
+(function() {
+  var browserLang = (navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+  setLang(browserLang);
+})();
+</script>
+</body>
+</html>
