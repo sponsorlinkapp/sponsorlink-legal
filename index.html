@@ -2,10 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=privacy.html">
-<title>SponsorLink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SponsorLink — سبونسورلينك</title>
+<meta name="description" content="SponsorLink connects job seekers and employers in Saudi Arabia, with a focus on sponsorship transfer.">
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; background: #F3EEE6; color: #2C2A33;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+  header { text-align: center; margin-bottom: 12px; }
+  .logo {
+    width: 84px; height: 84px; border-radius: 22px; margin: 0 auto 16px;
+    background: linear-gradient(180deg, #FBF8F3, #F3EEE6);
+    border: 1px solid #eee; display: flex; align-items: center; justify-content: center;
+  }
+  .logo svg { width: 44px; height: 44px; }
+  .brand { font-weight: 800; font-size: 1.8rem; }
+  .brand .sponsor { color: #9B87C4; }
+  .brand .link { color: #0B6B3A; }
+  .tagline { color: #6b6b6b; margin: 8px 0 0; font-size: 1.05rem; }
+  nav.lang { text-align: center; margin: 28px 0; }
+  nav.lang a {
+    display: inline-block; padding: 6px 16px; margin: 0 4px; border-radius: 999px;
+    background: #fff; border: 1px solid #ddd; color: #2C2A33; text-decoration: none; font-size: 0.9rem;
+  }
+  nav.lang a.active { background: #9B87C4; color: #fff; border-color: #9B87C4; }
+  section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 16px; border: 1px solid #eee; }
+  section h2 { font-size: 1.05rem; margin: 0 0 8px; color: #2C2A33; }
+  section p { margin: 0; color: #4a4a4a; white-space: pre-line; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 8px; }
+  .links a {
+    display: inline-block; padding: 10px 18px; border-radius: 12px; background: #fff;
+    border: 1px solid #ddd; color: #0B6B3A; font-weight: 600; text-decoration: none; font-size: 0.92rem;
+  }
+  .links a:hover { border-color: #0B6B3A; }
+  [dir="rtl"] { text-align: right; }
+  .updated { text-align: center; color: #9a9a9a; font-size: 0.85rem; margin-top: 28px; }
+  .block-ar { display: none; }
+  body.ar .block-en { display: none; }
+  body.ar .block-ar { display: block; }
+</style>
 </head>
 <body>
-<p>Redirecting to <a href="privacy.html">Privacy Policy</a>…</p>
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 20C4 20 5 10 12 10C19 10 20 20 20 20" stroke="#0B6B3A" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M8 20C8 20 8.5 14 12 14C15.5 14 16 20 16 20" stroke="#9B87C4" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="12" cy="6" r="3" stroke="#0B6B3A" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="brand"><span class="sponsor">Sponsor</span><span class="link">Link</span></div>
+    <p class="tagline block-en">Connecting job seekers and employers in Saudi Arabia</p>
+    <p class="tagline block-ar" dir="rtl">تطبيق يربط الباحثين عن عمل بأصحاب العمل في المملكة العربية السعودية</p>
+  </header>
+
+  <nav class="lang">
+    <a href="#" onclick="setLang('en');return false;" id="lang-en" class="active">English</a>
+    <a href="#" onclick="setLang('ar');return false;" id="lang-ar">العربية</a>
+  </nav>
+
+  <div class="block-en">
+    <section>
+      <h2>About SponsorLink</h2>
+      <p>SponsorLink is a bilingual (Arabic/English) mobile app that connects job seekers with employers across Saudi Arabia. Job seekers can build a profile, browse open roles, and apply directly, with dedicated support for sponsorship transfer (naql al-kafala) cases. Employers can post jobs, search candidates, and manage applicants — all from one place.</p>
+    </section>
+    <section>
+      <h2>Get in touch</h2>
+      <div class="links">
+        <a href="mailto:support@sponsorlink.app">Email us</a>
+        <a href="https://wa.me/966558313972">WhatsApp</a>
+        <a href="support.html">Support</a>
+      </div>
+    </section>
+    <section>
+      <h2>Legal</h2>
+      <div class="links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="block-ar" dir="rtl">
+    <section>
+      <h2>عن سبونسورلينك</h2>
+      <p>سبونسورلينك تطبيق جوال ثنائي اللغة (عربي/إنجليزي) يربط الباحثين عن عمل بأصحاب العمل في جميع أنحاء المملكة العربية السعودية. يقدر الباحث عن عمل يبني ملفه الشخصي، يتصفح الوظائف المتاحة، ويقدّم مباشرة، مع دعم خاص لحالات نقل الكفالة. وأصحاب العمل يقدرون ينشرون وظائف، يبحثون عن مرشحين، ويديرون المتقدمين — كل هذا من مكان واحد.</p>
+    </section>
+    <section>
+      <h2>تواصل معنا</h2>
+      <div class="links">
+        <a href="mailto:support@sponsorlink.app">راسلنا</a>
+        <a href="https://wa.me/966558313972">واتساب</a>
+        <a href="support.html">الدعم الفني</a>
+      </div>
+    </section>
+    <section>
+      <h2>الشروط والخصوصية</h2>
+      <div class="links">
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="terms.html">الشروط والأحكام</a>
+      </div>
+    </section>
+  </div>
+
+  <p class="updated block-en">SponsorLink Establishment — Kingdom of Saudi Arabia</p>
+  <p class="updated block-ar" dir="rtl">مؤسسة سبونسورلينك — المملكة العربية السعودية</p>
+</div>
+<script>
+function setLang(lang) {
+  document.body.className = lang;
+  document.getElementById('lang-en').className = lang === 'en' ? 'active' : '';
+  document.getElementById('lang-ar').className = lang === 'ar' ? 'active' : '';
+  document.documentElement.lang = lang;
+}
+(function() {
+  var browserLang = (navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+  setLang(browserLang);
+})();
+</script>
 </body>
 </html>
