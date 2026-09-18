@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Account — SponsorLink</title>
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; background: #F3EEE6; color: #2C2A33;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { text-align: center; margin-bottom: 32px; }
+  header h1 { font-size: 1.6rem; margin: 12px 0 4px; }
+  header p { color: #6b6b6b; margin: 0; }
+  .brand { font-weight: 800; font-size: 1.4rem; }
+  .brand .sponsor { color: #9B87C4; }
+  .brand .link { color: #0B6B3A; }
+  nav.lang { text-align: center; margin-bottom: 28px; }
+  nav.lang a {
+    display: inline-block; padding: 6px 16px; margin: 0 4px; border-radius: 999px;
+    background: #fff; border: 1px solid #ddd; color: #2C2A33; text-decoration: none; font-size: 0.9rem;
+  }
+  nav.lang a.active { background: #9B87C4; color: #fff; border-color: #9B87C4; }
+  section { background: #fff; border-radius: 16px; padding: 20px 24px; margin-bottom: 16px; border: 1px solid #eee; }
+  section h2 { font-size: 1.05rem; margin: 0 0 8px; color: #2C2A33; }
+  section p { margin: 0; color: #4a4a4a; white-space: pre-line; }
+  section ol, section ul { margin: 8px 0 0; padding-inline-start: 22px; color: #4a4a4a; }
+  section li { margin-bottom: 6px; }
+  section a { color: #0B6B3A; font-weight: 600; text-decoration: none; }
+  section a:hover { text-decoration: underline; }
+  [dir="rtl"] { text-align: right; }
+  .updated { text-align: center; color: #9a9a9a; font-size: 0.85rem; margin-top: 28px; }
+  .block-ar { display: none; }
+  body.ar .block-en { display: none; }
+  body.ar .block-ar { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="sponsor">Sponsor</span><span class="link">Link</span></div>
+    <h1 class="block-en">Delete Your Account</h1>
+    <h1 class="block-ar" dir="rtl">حذف حسابك</h1>
+  </header>
+
+  <nav class="lang">
+    <a href="#" onclick="setLang('en');return false;" id="lang-en" class="active">English</a>
+    <a href="#" onclick="setLang('ar');return false;" id="lang-ar">العربية</a>
+  </nav>
+
+  <div class="block-en">
+    <section>
+      <h2>How to delete your account</h2>
+      <p>You can permanently delete your SponsorLink account directly from the app — no need to contact support.</p>
+      <ol>
+        <li>Open the SponsorLink app and sign in.</li>
+        <li>Go to <strong>Settings</strong>.</li>
+        <li>Tap <strong>Delete Account</strong>.</li>
+        <li>Enter your account password to confirm.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>What gets deleted</h2>
+      <p>Deletion is immediate and permanent — it cannot be undone. It removes your account and everything tied to it: your profile (name, contact info, photo), job posts or applications, messages and conversations, saved/shortlisted candidates, profile views, and token purchase/transaction history. We do not keep a copy after deletion, and no data is retained beyond this point.</p>
+    </section>
+    <section>
+      <h2>Need help?</h2>
+      <p>If you can't access the app to delete your account yourself, email us at <a href="mailto:support@sponsorlink.app">support@sponsorlink.app</a> from the address on your account and we'll delete it for you.</p>
+    </section>
+  </div>
+
+  <div class="block-ar" dir="rtl">
+    <section>
+      <h2>كيف تحذف حسابك</h2>
+      <p>تقدر تحذف حسابك في SponsorLink نهائياً من داخل التطبيق مباشرة — ما تحتاج تتواصل مع الدعم.</p>
+      <ol>
+        <li>افتح تطبيق SponsorLink وسجّل الدخول.</li>
+        <li>روح إلى <strong>الإعدادات</strong>.</li>
+        <li>اضغط <strong>حذف الحساب</strong>.</li>
+        <li>أدخل كلمة مرور حسابك للتأكيد.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>وش اللي ينحذف</h2>
+      <p>الحذف فوري ونهائي — ما يمكن التراجع عنه. يحذف حسابك وكل شي مرتبط فيه: ملفك الشخصي (الاسم، بيانات التواصل، الصورة)، الوظائف المنشورة أو طلبات التقديم، الرسائل والمحادثات، المرشحين المحفوظين، مشاهدات الملف الشخصي، وسجل شراء واستخدام التوكنات. ما نحتفظ بأي نسخة بعد الحذف، وما فيه أي بيانات تبقى بعد هذي النقطة.</p>
+    </section>
+    <section>
+      <h2>تحتاج مساعدة؟</h2>
+      <p>إذا ما تقدر تدخل التطبيق تحذف حسابك بنفسك، راسلنا على <a href="mailto:support@sponsorlink.app">support@sponsorlink.app</a> من نفس الإيميل المسجل في حسابك وبنحذفه لك.</p>
+    </section>
+  </div>
+
+  <p class="updated block-en">SponsorLink Establishment — Kingdom of Saudi Arabia</p>
+  <p class="updated block-ar" dir="rtl">مؤسسة سبونسورلينك — المملكة العربية السعودية</p>
+</div>
+<script>
+function setLang(lang) {
+  document.body.className = lang;
+  document.getElementById('lang-en').className = lang === 'en' ? 'active' : '';
+  document.getElementById('lang-ar').className = lang === 'ar' ? 'active' : '';
+  document.documentElement.lang = lang;
+}
+(function() {
+  var browserLang = (navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+  setLang(browserLang);
+})();
+</script>
+</body>
+</html>
