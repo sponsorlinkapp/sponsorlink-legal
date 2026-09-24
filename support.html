@@ -30,6 +30,11 @@
   section a { color: #0B6B3A; font-weight: 600; text-decoration: none; }
   section a:hover { text-decoration: underline; }
   [dir="rtl"] { text-align: right; }
+  /* A phone number is a strong-LTR run sitting inside RTL paragraph text —
+     without this it can visually reorder/split its digit groups when the
+     line wraps mid-number on a narrow screen. Isolating it keeps its
+     internal order fixed and nowrap keeps it from breaking across lines. */
+  .phone-ltr { direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
   .updated { text-align: center; color: #9a9a9a; font-size: 0.85rem; margin-top: 28px; }
   .block-ar { display: none; }
   body.ar .block-en { display: none; }
@@ -60,7 +65,7 @@
     </section>
     <section>
       <h2>WhatsApp</h2>
-      <p><a href="https://wa.me/966558313972">+966 55 831 3972</a></p>
+      <p><a href="https://wa.me/966558313972"><span class="phone-ltr">+966 55 831 3972</span></a></p>
     </section>
     <section>
       <h2>In the App</h2>
@@ -79,7 +84,7 @@
     </section>
     <section>
       <h2>واتساب</h2>
-      <p><a href="https://wa.me/966558313972">+966 55 831 3972</a></p>
+      <p><a href="https://wa.me/966558313972"><span class="phone-ltr">+966 55 831 3972</span></a></p>
     </section>
     <section>
       <h2>من داخل التطبيق</h2>

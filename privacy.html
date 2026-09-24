@@ -28,6 +28,11 @@
   section h2 { font-size: 1.05rem; margin: 0 0 8px; color: #2C2A33; }
   section p { margin: 0; color: #4a4a4a; white-space: pre-line; }
   [dir="rtl"] { text-align: right; }
+  /* A phone number is a strong-LTR run sitting inside RTL paragraph text —
+     without this it can visually reorder/split its digit groups when the
+     line wraps mid-number on a narrow screen. Isolating it keeps its
+     internal order fixed and nowrap keeps it from breaking across lines. */
+  .phone-ltr { direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
   .updated { text-align: center; color: #9a9a9a; font-size: 0.85rem; margin-top: 28px; }
   .block-ar { display: none; }
   body.ar .block-en { display: none; }
@@ -80,7 +85,7 @@
     </section>
     <section>
       <h2>8. Contact Us</h2>
-      <p>SponsorLink is operated by SponsorLink Establishment (مؤسسة سبونسورلينك), registered in the Kingdom of Saudi Arabia under Commercial Registration No. 7055137397. For any privacy-related question, contact us at support@sponsorlink.app or via WhatsApp at +966 55 831 3972.</p>
+      <p>SponsorLink is operated by SponsorLink Establishment (مؤسسة سبونسورلينك), registered in the Kingdom of Saudi Arabia under Commercial Registration No. 7055137397. For any privacy-related question, contact us at support@sponsorlink.app or via WhatsApp at <span class="phone-ltr">+966 55 831 3972</span>.</p>
     </section>
     <p style="text-align:center; margin-top: 20px;"><a href="terms.html">Terms &amp; Conditions →</a></p>
   </div>
@@ -116,7 +121,7 @@
     </section>
     <section>
       <h2>8. تواصل معنا</h2>
-      <p>يُدار SponsorLink من قِبل مؤسسة سبونسورلينك، المسجّلة في المملكة العربية السعودية بموجب سجل تجاري رقم 7055137397. لأي استفسار متعلق بالخصوصية، تواصل معنا عبر support@sponsorlink.app أو واتساب على ‎+966 55 831 3972.</p>
+      <p>يُدار SponsorLink من قِبل مؤسسة سبونسورلينك، المسجّلة في المملكة العربية السعودية بموجب سجل تجاري رقم 7055137397. لأي استفسار متعلق بالخصوصية، تواصل معنا عبر support@sponsorlink.app أو واتساب على <span class="phone-ltr">+966 55 831 3972</span>.</p>
     </section>
     <p style="text-align:center; margin-top: 20px;"><a href="terms.html">الشروط والأحكام ←</a></p>
   </div>

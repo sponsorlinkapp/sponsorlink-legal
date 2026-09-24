@@ -28,6 +28,11 @@
   section h2 { font-size: 1.05rem; margin: 0 0 8px; color: #2C2A33; }
   section p { margin: 0; color: #4a4a4a; white-space: pre-line; }
   [dir="rtl"] { text-align: right; }
+  /* A phone number is a strong-LTR run sitting inside RTL paragraph text —
+     without this it can visually reorder/split its digit groups when the
+     line wraps mid-number on a narrow screen. Isolating it keeps its
+     internal order fixed and nowrap keeps it from breaking across lines. */
+  .phone-ltr { direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
   .updated { text-align: center; color: #9a9a9a; font-size: 0.85rem; margin-top: 28px; }
   .block-ar { display: none; }
   body.ar .block-en { display: none; }
@@ -56,7 +61,7 @@
     </section>
     <section>
       <h2>2. Company Information</h2>
-      <p>SponsorLink is operated by SponsorLink Establishment (مؤسسة سبونسورلينك), registered in the Kingdom of Saudi Arabia under Commercial Registration No. 7055137397. For official communication regarding this platform — support, sales, or billing inquiries — you may contact us via WhatsApp at +966 55 831 3972, or by email at support@sponsorlink.app.</p>
+      <p>SponsorLink is operated by SponsorLink Establishment (مؤسسة سبونسورلينك), registered in the Kingdom of Saudi Arabia under Commercial Registration No. 7055137397. For official communication regarding this platform — support, sales, or billing inquiries — you may contact us via WhatsApp at <span class="phone-ltr">+966 55 831 3972</span>, or by email at support@sponsorlink.app.</p>
     </section>
     <section>
       <h2>3. Acceptable Use</h2>
@@ -100,7 +105,7 @@ All Token purchases are final and non-refundable or non-exchangeable once paymen
     </section>
     <section>
       <h2>2. معلومات المنشأة</h2>
-      <p>يُدار SponsorLink من قِبل مؤسسة سبونسورلينك، المسجّلة في المملكة العربية السعودية بموجب سجل تجاري رقم 7055137397. للتواصل الرسمي بخصوص هذه المنصة — الدعم، المبيعات، أو استفسارات الفوترة — يمكنك التواصل معنا عبر واتساب على ‎+966 55 831 3972، أو عبر البريد الإلكتروني support@sponsorlink.app.</p>
+      <p>يُدار SponsorLink من قِبل مؤسسة سبونسورلينك، المسجّلة في المملكة العربية السعودية بموجب سجل تجاري رقم 7055137397. للتواصل الرسمي بخصوص هذه المنصة — الدعم، المبيعات، أو استفسارات الفوترة — يمكنك التواصل معنا عبر واتساب على <span class="phone-ltr">+966 55 831 3972</span>، أو عبر البريد الإلكتروني support@sponsorlink.app.</p>
     </section>
     <section>
       <h2>3. الاستخدام المقبول</h2>
