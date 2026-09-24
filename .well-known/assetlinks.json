@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.sponsorlink.mobile",
+      "sha256_cert_fingerprints": [
+        "8A:7C:3D:06:D8:44:AD:93:61:66:06:81:92:CC:95:60:CE:65:92:67:ED:2E:36:3F:F9:43:29:3B:7C:95:35:FC"
+      ]
+    }
+  }
+]
