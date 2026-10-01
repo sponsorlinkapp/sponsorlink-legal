@@ -1,184 +1,351 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SponsorLink — سبونسورلينك</title>
-<meta name="description" content="SponsorLink connects job seekers and employers in Saudi Arabia, with a focus on sponsorship transfer.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SponsorLink — سبونسر لينك</title>
+<meta name="description" content="تطبيق يربط الباحثين عن عمل بأصحاب العمل في المملكة العربية السعودية">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    min-height: 100vh;
-    position: relative; overflow-x: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #201F29;
-    line-height: 1.6;
-    background: #EFEBFB;
-    background-image:
-      radial-gradient(ellipse 900px 700px at 10% -10%, #D9CBFA 0%, transparent 60%),
-      radial-gradient(ellipse 800px 700px at 100% 10%, #C9F2D9 0%, transparent 55%),
-      radial-gradient(ellipse 900px 800px at 50% 120%, #9B87C4 0%, transparent 60%),
-      linear-gradient(180deg, #F6F3FD 0%, #EAF3EC 100%);
-    background-attachment: fixed;
-  }
-  .orb {
-    position: fixed; border-radius: 50%; filter: blur(50px); z-index: 0; pointer-events: none;
-  }
-  .orb-1 { width: 260px; height: 260px; background: radial-gradient(circle, #B9A6DE, transparent 70%); top: -60px; right: -60px; opacity: 0.8; }
-  .orb-2 { width: 220px; height: 220px; background: radial-gradient(circle, #6FCF97, transparent 70%); bottom: -40px; left: -60px; opacity: 0.6; }
+body{margin:0;background:#faf8f4;color:#23202b;font-family:'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.lat{font-family:'Plus Jakarta Sans','IBM Plex Sans Arabic',sans-serif}
+[data-lang="ar"] .en{display:none!important}
+[data-lang="en"] .ar{display:none!important}
+.grad{background:linear-gradient(90deg,#9b86c4,#0f6b3c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.btnp{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;border:0;background:linear-gradient(110deg,#9b86c4,#7a5fa0);color:#fff;font-weight:700;font-size:15px;box-shadow:0 10px 24px rgba(122,95,160,.28);transition:transform .2s,box-shadow .2s}
+.btno{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;border:2px solid #0f6b3c;background:#fff;color:#0f6b3c;font-weight:700;font-size:15px;transition:transform .2s,background .2s}
+.btnp:hover,.btno:hover{transform:translateY(-2px)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#e6f1ea;border:1px solid #9cc7ad;color:#0f6b3c;font-weight:600;font-size:13px}
+.deco{position:absolute;pointer-events:none;border-radius:50%;border:1px solid rgba(15,107,60,.13)}
+.leaf path{fill:none;stroke:#9cc7ad;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 2.6s .3s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.rise{opacity:0;animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal[data-on="1"]{opacity:1;transform:none}
 
-  .wrap { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; padding: 56px 20px 80px; }
-  header { text-align: center; margin-bottom: 8px; }
-  .brand {
-    font-weight: 800; font-size: 2rem; letter-spacing: -0.02em;
-    background: linear-gradient(90deg, #6E4FC1, #14895A);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .tagline { color: #57536A; margin: 10px 0 0; font-size: 1.02rem; }
+/* phone + cycling job cards */
+.phone{position:relative;width:270px;height:540px;border-radius:44px;background:#1d1a22;padding:12px;box-shadow:0 40px 80px rgba(35,32,43,.25)}
+.screen{position:relative;width:100%;height:100%;border-radius:34px;background:#faf8f4;overflow:hidden}
+.jc{position:absolute;left:14px;right:14px;top:120px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 12px 28px rgba(35,32,43,.12);opacity:0;animation:jc 12s cubic-bezier(.3,.8,.2,1) infinite}
+.jc:nth-child(2){animation-delay:3s}.jc:nth-child(3){animation-delay:6s}.jc:nth-child(4){animation-delay:9s}
+@keyframes jc{0%{opacity:0;transform:translateY(60px) scale(.94)}5%{opacity:1;transform:none}20%{opacity:1;transform:none}25%{opacity:0;transform:translateX(-120%) rotate(-10deg)}100%{opacity:0;transform:translateX(-120%)}}
+.stamp{position:absolute;top:14px;left:14px;padding:4px 10px;border-radius:999px;background:#0f6b3c;color:#fff;font-size:11px;font-weight:700;opacity:0;transform:scale(.6);animation:stamp 12s ease infinite;animation-delay:inherit}
+@keyframes stamp{0%,13%{opacity:0;transform:scale(.6)}16%,22%{opacity:1;transform:scale(1)}25%,100%{opacity:0}}
+.tag{display:inline-block;padding:4px 9px;border-radius:999px;background:#f1edf8;color:#6d5596;font-size:11px;font-weight:600}
+.tapbtn{margin-top:12px;height:38px;border-radius:999px;background:linear-gradient(110deg,#9b86c4,#7a5fa0);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;animation:tap 12s ease infinite;animation-delay:inherit}
+@keyframes tap{0%,12%{transform:none}14%{transform:scale(.93)}16%{transform:none;background:#0f6b3c}100%{background:#0f6b3c}}
 
-  nav.lang { text-align: center; margin: 30px 0 34px; }
-  nav.lang a {
-    display: inline-block; padding: 7px 18px; margin: 0 4px; border-radius: 999px;
-    background: rgba(255,255,255,0.65); border: 1px solid rgba(124,95,191,0.18);
-    color: #57536A; text-decoration: none; font-size: 0.88rem; font-weight: 600;
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-  nav.lang a.active { background: linear-gradient(90deg, #7C5FBF, #6E4FC1); color: #fff; border-color: transparent; }
+/* link line */
+.link path.ln{fill:none;stroke:url(#lg);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.6,0,.2,1)}
+[data-on="1"] .link path.ln{stroke-dashoffset:0}
+.link .dotm{opacity:0}
+[data-on="1"] .link .dotm{opacity:1;transition:opacity .4s 1.6s}
+.okb{opacity:0;transform:scale(.6);transition:all .5s cubic-bezier(.2,.9,.3,1.4) 1.7s}
+[data-on="1"] .okb{opacity:1;transform:scale(1)}
 
-  section {
-    background: rgba(255,255,255,0.72);
-    -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
-    border-radius: 22px; padding: 26px 26px; margin-bottom: 16px;
-    border: 1px solid rgba(255,255,255,0.9);
-    box-shadow: 0 20px 45px -22px rgba(64,45,110,0.22), 0 1px 0 rgba(255,255,255,0.6) inset;
-  }
-  section h2 { font-size: 1.02rem; margin: 0 0 10px; color: #201F29; font-weight: 700; }
-  section p { margin: 0; color: #4a4658; white-space: pre-line; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
-  .links a {
-    display: inline-block; padding: 11px 20px; border-radius: 14px;
-    background: #ffffff; border: 1px solid rgba(0,0,0,0.06);
-    color: #0B6B3A; font-weight: 700; text-decoration: none; font-size: 0.92rem;
-    box-shadow: 0 10px 20px -14px rgba(20,20,25,0.25);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .links a:hover { transform: translateY(-2px); box-shadow: 0 14px 24px -14px rgba(20,20,25,0.3); }
-  .social { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 4px; }
-  .social a {
-    width: 46px; height: 46px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 20px -12px rgba(20,20,25,0.35);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .social a:hover { transform: translateY(-2px); box-shadow: 0 14px 24px -12px rgba(20,20,25,0.4); }
-  .social a svg { width: 22px; height: 22px; }
-  .social .ig { background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
-  .social .x { background: #000000; }
-  .social .fb { background: #1877f2; }
-  .social .wa { background: #25d366; }
-  [dir="rtl"] { text-align: right; }
-  .updated { text-align: center; color: #8A85A3; font-size: 0.85rem; margin-top: 30px; }
-  .block-ar { display: none; }
-  body.ar .block-en { display: none; }
-  body.ar .block-ar { display: block; }
+/* audience toggle */
+.seg{position:relative;display:inline-flex;padding:6px;border-radius:999px;background:#fff;box-shadow:0 8px 22px rgba(35,32,43,.08)}
+.seg button{position:relative;z-index:1;border:0;background:transparent;padding:12px 20px;border-radius:999px;font-size:15px;font-weight:700;color:#6e6a75;transition:color .3s}
+.seg .knob{position:absolute;top:6px;bottom:6px;border-radius:999px;transition:all .45s cubic-bezier(.3,.8,.2,1)}
+[data-aud="seek"] .knob{inset-inline-start:6px;width:calc(50% - 6px);background:linear-gradient(110deg,#9b86c4,#7a5fa0)}
+[data-aud="hire"] .knob{inset-inline-start:50%;width:calc(50% - 6px);background:#0f6b3c}
+[data-aud="seek"] .seg [data-act="seek"],[data-aud="hire"] .seg [data-act="hire"]{color:#fff}
+.aud{width:100%;display:flex;flex-direction:column;gap:22px}
+[data-aud="seek"] .aud-hire,[data-aud="hire"] .aud-seek{display:none}
+.aud-in{animation:audin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes audin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:24px;padding:22px;box-shadow:0 10px 30px rgba(35,32,43,.06);display:flex;flex-direction:column;gap:10px}
+.ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.step{display:flex;gap:14px;align-items:flex-start}
+.num{flex-shrink:0;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+
+/* sectors marquee */
+.track{display:flex;gap:14px;width:max-content;animation:marq 28s linear infinite}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(50%)}}
+[data-lang="en"] .track{animation-name:marqen}
+@keyframes marqen{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.sec{display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;background:#fff;border:1px solid #ece7f3;font-weight:600;white-space:nowrap}
+.sec svg{width:22px;height:22px;fill:none;stroke:#7a5fa0;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* whatsapp demo */
+.chat{background:#efeae2;border-radius:24px;padding:18px 14px;display:flex;flex-direction:column;gap:10px;min-height:250px}
+.bub{max-width:82%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.6;box-shadow:0 1px 1px rgba(0,0,0,.06);opacity:0;transform:translateY(8px) scale(.97);animation:bub 10s ease infinite}
+.me{align-self:flex-start;background:#d9fdd3;border-start-start-radius:4px}
+.them{align-self:flex-end;background:#fff;border-start-end-radius:4px}
+.b1{animation-delay:0s}.typing{animation-delay:1.2s}.b2{animation-delay:2.6s}.b3{animation-delay:4.4s}
+@keyframes bub{0%{opacity:0;transform:translateY(8px) scale(.97)}4%,88%{opacity:1;transform:none}94%,100%{opacity:0}}
+.typing{animation-name:typ}
+@keyframes typ{0%{opacity:0}4%,13%{opacity:1}14%,100%{opacity:0;height:0;padding:0;margin:0}}
+.typing i{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:#9a9a9a;animation:dots 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dots{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-4px);opacity:1}}
+
+/* QR */
+.qr{width:150px;height:150px}
+.qr rect{fill:#23202b;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.2)}
+[data-on="1"] .qr rect{animation:qr .4s cubic-bezier(.2,.9,.3,1.3) forwards}
+@keyframes qr{to{opacity:1;transform:none}}
+
+/* faq */
+details{background:#fff;border-radius:18px;padding:0 18px;box-shadow:0 6px 18px rgba(35,32,43,.05)}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-weight:700;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary .pm{width:26px;height:26px;border-radius:50%;background:#f1edf8;color:#7a5fa0;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+details[open] summary .pm{transform:rotate(45deg)}
+details p{margin:0 0 18px;color:#6e6a75;line-height:1.8}
+details[open] p{animation:audin .4s ease}
+
+.wa{position:fixed;bottom:20px;inset-inline-end:20px;z-index:50;width:58px;height:58px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 26px rgba(37,211,102,.4);animation:wap 2.4s ease-in-out infinite}
+@keyframes wap{0%,100%{box-shadow:0 12px 26px rgba(37,211,102,.4),0 0 0 0 rgba(37,211,102,.45)}50%{box-shadow:0 12px 26px rgba(37,211,102,.4),0 0 0 12px rgba(37,211,102,0)}}
+.floaty{animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.grid2{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:40px;align-items:center}
+.grid3{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:14px}
+@media (min-width:860px){.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}.h1{font-size:56px!important}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.jc:first-child,.bub,.reveal,.rise{opacity:1!important;transform:none!important}.qr rect{opacity:1}}
+.soc{width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #ece7f3;display:flex;align-items:center;justify-content:center;color:#7a5fa0;transition:transform .25s,background .25s,color .25s}
+.soc:hover{transform:translateY(-3px);background:#7a5fa0;color:#fff}
+.soc svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
 </style>
 </head>
 <body>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="wrap">
-  <header>
-    <div class="brand"><span class="sponsor">Sponsor</span><span class="link">Link</span></div>
-    <p class="tagline block-en">Connecting job seekers and employers in Saudi Arabia</p>
-    <p class="tagline block-ar" dir="rtl">تطبيق يربط الباحثين عن عمل بأصحاب العمل في المملكة العربية السعودية</p>
-  </header>
+<div data-sl-root="1" data-lang="ar" data-aud="seek" dir="rtl" style="width: 100%; background: #faf8f4; overflow-x: clip; position: relative">
 
-  <nav class="lang">
-    <a href="#" onclick="setLang('en');return false;" id="lang-en" class="active">English</a>
-    <a href="#" onclick="setLang('ar');return false;" id="lang-ar">العربية</a>
-  </nav>
-
-  <div class="block-en">
-    <section>
-      <h2>About SponsorLink</h2>
-      <p>SponsorLink is a bilingual (Arabic/English) mobile app that connects job seekers with employers across Saudi Arabia. It serves job seekers from a wide range of backgrounds — Saudi nationals, individuals born in Saudi Arabia, residents currently inside the Kingdom, and individuals outside the Kingdom seeking to relocate for work. The app focuses on hospitality and service-sector roles — restaurants, cafés, hotels, salons, flower shops, spas, and delivery — along with the admin roles that support them. Job seekers can build a profile, browse open roles, and apply directly, with dedicated support for sponsorship transfer (naql al-kafala) cases. Employers can post jobs, search candidates, and manage applicants — all from one place.</p>
-    </section>
-    <section>
-      <h2>Download &amp; Follow</h2>
-      <div class="links">
-        <a href="https://sponsorlink.app/download">Download the App</a>
-      </div>
-      <div class="social">
-        <a class="ig" href="https://instagram.com/sponsorlink_ksa" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.986 8.74 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.717 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.717-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.014 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></a>
-        <a class="x" href="https://x.com/sponsorlink_ksa" aria-label="X"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a class="fb" href="https://facebook.com/share/1CPXsTEzfU" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg></a>
-        <a class="wa" href="https://wa.me/966558313972" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.07-1.32A9.93 9.93 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.19-1.77 1.24-.45.05-.97.24-3.25-.7-2.73-1.13-4.5-3.9-4.64-4.08-.14-.18-1.1-1.47-1.1-2.8 0-1.33.7-1.98.95-2.25.24-.27.53-.34.7-.34.18 0 .35 0 .5.01.16.01.38-.06.6.45.22.53.76 1.83.83 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.15 1.5 1.87 1.03.92 1.9 1.2 2.17 1.34.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.13.44.2.5.31.07.11.07.65-.15 1.27z"/></svg></a>
-      </div>
-    </section>
-    <section>
-      <h2>Get in touch</h2>
-      <div class="links">
-        <a href="support.html">Support</a>
-      </div>
-    </section>
-    <section>
-      <h2>Legal</h2>
-      <div class="links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-      </div>
-    </section>
-  </div>
-
-  <div class="block-ar" dir="rtl">
-    <section>
-      <h2>عن سبونسورلينك</h2>
-      <p>سبونسورلينك تطبيق جوال ثنائي اللغة (عربي/إنجليزي) يربط الباحثين عن عمل بأصحاب العمل في جميع أنحاء المملكة العربية السعودية. يخدم التطبيق باحثين عن عمل من فئات متنوعة — المواطنين السعوديين، مواليد السعودية، المقيمين حاليًا داخل المملكة، وكذلك الأشخاص خارج المملكة الراغبين بالانتقال للعمل فيها. ويركّز التطبيق على وظائف قطاعات الضيافة والخدمات — المطاعم، الكوفيات، الفنادق، الصالونات، محلات الورود، السبا، وخدمات التوصيل — بالإضافة إلى الوظائف الإدارية اللي تخدم هذي القطاعات. يقدر الباحث عن عمل يبني ملفه الشخصي، يتصفح الوظائف المتاحة، ويقدّم مباشرة، مع دعم خاص لحالات نقل الكفالة. وأصحاب العمل يقدرون ينشرون وظائف، يبحثون عن مرشحين، ويديرون المتقدمين — كل هذا من مكان واحد.</p>
-    </section>
-    <section>
-      <h2>حمّل التطبيق وتابعنا</h2>
-      <div class="links">
-        <a href="https://sponsorlink.app/download">حمّل التطبيق</a>
-      </div>
-      <div class="social">
-        <a class="ig" href="https://instagram.com/sponsorlink_ksa" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.986 8.74 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.717 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.717-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.014 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></a>
-        <a class="x" href="https://x.com/sponsorlink_ksa" aria-label="X"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a class="fb" href="https://facebook.com/share/1CPXsTEzfU" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg></a>
-        <a class="wa" href="https://wa.me/966558313972" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.07-1.32A9.93 9.93 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.19-1.77 1.24-.45.05-.97.24-3.25-.7-2.73-1.13-4.5-3.9-4.64-4.08-.14-.18-1.1-1.47-1.1-2.8 0-1.33.7-1.98.95-2.25.24-.27.53-.34.7-.34.18 0 .35 0 .5.01.16.01.38-.06.6.45.22.53.76 1.83.83 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.15 1.5 1.87 1.03.92 1.9 1.2 2.17 1.34.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.13.44.2.5.31.07.11.07.65-.15 1.27z"/></svg></a>
-      </div>
-    </section>
-    <section>
-      <h2>تواصل معنا</h2>
-      <div class="links">
-        <a href="support.html">الدعم الفني</a>
-      </div>
-    </section>
-    <section>
-      <h2>الشروط والخصوصية</h2>
-      <div class="links">
-        <a href="privacy.html">سياسة الخصوصية</a>
-        <a href="terms.html">الشروط والأحكام</a>
-      </div>
-    </section>
-  </div>
-
-  <p class="updated block-en">SponsorLink Establishment — Kingdom of Saudi Arabia</p>
-  <p class="updated block-ar" dir="rtl">مؤسسة سبونسورلينك — المملكة العربية السعودية</p>
+<header style="position: sticky; top: 0; z-index: 40; background: rgba(250,248,244,.85); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(35,32,43,.05)">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; height: 68px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 12px; background: #9b86c4; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>
 </div>
+<span class="lat grad" style="font-size: 20px; font-weight: 800; letter-spacing: -.3px">SponsorLink</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<button class="pill" data-act="lang" aria-label="Change language" style="border: 1px solid #9cc7ad">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"></path></svg>
+<span class="ar lat">English</span><span class="en">العربية</span>
+</button>
+</div>
+</div>
+</header>
+
+<section style="position: relative; overflow: hidden; padding: 40px 0 70px">
+<div class="deco" style="width: 380px; height: 380px; top: -160px; inset-inline-end: -120px"></div>
+<div class="deco" style="width: 520px; height: 520px; top: -230px; inset-inline-end: -190px"></div>
+<div style="position: absolute; top: 210px; left: -10%; right: -10%; height: 1px; background: rgba(15,107,60,.12); transform: rotate(-8deg)"></div>
+<svg class="leaf" viewBox="0 0 200 220" style="position: absolute; bottom: -10px; inset-inline-start: -30px; width: 230px; height: 250px">
+<path d="M70 215 C 72 160, 74 110, 80 40"></path><path d="M70 215 C 50 160, 25 115, 5 70"></path><path d="M70 215 C 95 165, 125 120, 150 95"></path><path d="M70 215 C 110 180, 150 160, 195 150"></path><path d="M70 215 C 40 190, 15 175, -5 170"></path>
+</svg>
+<div class="wrap grid2" style="position: relative">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span class="pill rise" style="align-self: flex-start; animation-delay: .1s"><span class="ar">منصة توظيف احترافية في المملكة</span><span class="en lat">Professional recruitment platform · KSA</span></span>
+<h1 class="rise h1" style="animation-delay: .2s; margin: 0; font-size: 42px; line-height: 1.25; font-weight: 700"><span class="ar">وظيفتك الجاية…<br><span class="grad">على بُعد رابط</span></span><span class="en lat">Your next job…<br><span class="grad">one link away</span></span></h1>
+<p class="rise" style="animation-delay: .35s; margin: 0; font-size: 17px; line-height: 1.85; color: #6e6a75; max-width: 460px"><span class="ar">سبونسر لينك يربط الباحثين عن عمل بأصحاب العمل مباشرة: مطاعم، كافيهات، صالونات، ومحلات. للسعوديين والمقيمين.</span><span class="en lat">SponsorLink connects job seekers directly with employers: restaurants, cafes, salons and shops. For Saudis and residents.</span></p>
+<div class="rise" style="animation-delay: .5s; display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#download" class="btnp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg><span class="ar">حمّل التطبيق</span><span class="en lat">Get the app</span></a>
+<a href="#how" class="btno"><span class="ar">كيف يشتغل؟</span><span class="en lat">How it works</span></a>
+</div>
+</div>
+<div style="display: flex; justify-content: center">
+<div class="phone floaty">
+<div class="screen">
+<div style="position: absolute; top: 0; left: 0; right: 0; padding: 26px 18px 0; display: flex; flex-direction: column; gap: 8px">
+<div style="width: 70px; height: 6px; border-radius: 3px; background: #1d1a22; align-self: center; margin-top: -14px; margin-bottom: 8px"></div>
+<span style="font-size: 12px; color: #6e6a75"><span class="ar">وظائف قريبة منك</span><span class="en lat">Jobs near you</span></span>
+<span style="font-size: 20px; font-weight: 700"><span class="ar">الدمام</span><span class="en lat">Dammam</span></span>
+</div>
+<div>
+<div class="jc"><div class="stamp"><span class="ar">تم التقديم ✓</span><span class="en lat">Applied ✓</span></div><div style="display: flex; flex-direction: column; gap: 8px"><span class="tag"><span class="ar">كوفي مختص</span><span class="en lat">Specialty cafe</span></span><span style="font-size: 18px; font-weight: 700"><span class="ar">باريستا</span><span class="en lat">Barista</span></span><span style="font-size: 13px; color: #6e6a75"><span class="ar">دوام كامل · الدمام</span><span class="en lat">Full-time · Dammam</span></span><div class="tapbtn"><span class="ar">قدّم الحين</span><span class="en lat">Apply now</span></div></div></div>
+<div class="jc"><div class="stamp"><span class="ar">تم التقديم ✓</span><span class="en lat">Applied ✓</span></div><div style="display: flex; flex-direction: column; gap: 8px"><span class="tag"><span class="ar">مطعم</span><span class="en lat">Restaurant</span></span><span style="font-size: 18px; font-weight: 700"><span class="ar">كاشير</span><span class="en lat">Cashier</span></span><span style="font-size: 13px; color: #6e6a75"><span class="ar">شفت مسائي · الخبر</span><span class="en lat">Evening shift · Khobar</span></span><div class="tapbtn"><span class="ar">قدّم الحين</span><span class="en lat">Apply now</span></div></div></div>
+<div class="jc"><div class="stamp"><span class="ar">تم التقديم ✓</span><span class="en lat">Applied ✓</span></div><div style="display: flex; flex-direction: column; gap: 8px"><span class="tag"><span class="ar">صالون</span><span class="en lat">Salon</span></span><span style="font-size: 18px; font-weight: 700"><span class="ar">مصففة شعر</span><span class="en lat">Hair stylist</span></span><span style="font-size: 13px; color: #6e6a75"><span class="ar">دوام كامل · الدمام</span><span class="en lat">Full-time · Dammam</span></span><div class="tapbtn"><span class="ar">قدّم الحين</span><span class="en lat">Apply now</span></div></div></div>
+<div class="jc"><div class="stamp"><span class="ar">تم التقديم ✓</span><span class="en lat">Applied ✓</span></div><div style="display: flex; flex-direction: column; gap: 8px"><span class="tag"><span class="ar">محل ورد</span><span class="en lat">Flower shop</span></span><span style="font-size: 18px; font-weight: 700"><span class="ar">منسّق ورد</span><span class="en lat">Florist</span></span><span style="font-size: 13px; color: #6e6a75"><span class="ar">دوام جزئي · الظهران</span><span class="en lat">Part-time · Dhahran</span></span><div class="tapbtn"><span class="ar">قدّم الحين</span><span class="en lat">Apply now</span></div></div></div>
+</div>
+<div style="position: absolute; bottom: 22px; left: 18px; right: 18px; display: flex; justify-content: space-around; color: #b9b3c4">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7a5fa0" stroke-width="2"><path d="M3 11l9-7 9 7v9H3z"></path></svg>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H8l-4 4z"></path></svg>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4-6 8-6s7 2 8 6"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section data-reveal="1" class="reveal" style="padding: 20px 0 70px">
+<div class="wrap" style="display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center">
+<h2 style="margin: 0; font-size: 28px; font-weight: 700"><span class="ar">نربطك مباشرة، بدون وسيط</span><span class="en lat">Direct connection, no middleman</span></h2>
+<div class="link" style="position: relative; width: 100%; max-width: 560px; height: 150px">
+<svg viewBox="0 0 560 150" style="position: absolute; inset: 0; width: 100%; height: 100%">
+<defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#0f6b3c"></stop><stop offset="1" stop-color="#9b86c4"></stop></linearGradient></defs>
+<path class="ln" pathLength="1" d="M90 75 C 200 -5, 360 155, 470 75"></path>
+<circle class="dotm" r="5" fill="#9b86c4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M90 75 C 200 -5, 360 155, 470 75"></animateMotion></circle>
+<circle class="dotm" r="5" fill="#0f6b3c"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear" path="M90 75 C 200 -5, 360 155, 470 75"></animateMotion></circle>
+</svg>
+<div style="position: absolute; left: 0; top: 30px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 90px">
+<div class="ic" style="width: 64px; height: 64px; border-radius: 50%; background: #e6f1ea; color: #0f6b3c"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"></path><path d="M9 21v-6h6v6"></path></svg></div>
+<span style="font-size: 13px; font-weight: 600"><span class="ar">صاحب العمل</span><span class="en lat">Employer</span></span>
+</div>
+<div style="position: absolute; right: 0; top: 30px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 90px">
+<div class="ic" style="width: 64px; height: 64px; border-radius: 50%; background: #f1edf8; color: #7a5fa0"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4-6 8-6s7 2 8 6"></path></svg></div>
+<span style="font-size: 13px; font-weight: 600"><span class="ar">الباحث عن عمل</span><span class="en lat">Job seeker</span></span>
+</div>
+<div class="okb" style="position: absolute; left: 50%; top: 52px; margin-left: -60px; width: 120px; padding: 8px 0; border-radius: 999px; background: #fff; box-shadow: 0 8px 20px rgba(35,32,43,.12); font-size: 13px; font-weight: 700; color: #0f6b3c"><span class="ar">تم التواصل ✓</span><span class="en lat">Connected ✓</span></div>
+</div>
+</div>
+</section>
+
+<section id="how" style="padding: 10px 0 70px">
+<div class="wrap" style="display: flex; flex-direction: column; align-items: center; gap: 28px">
+<div data-reveal="1" class="reveal" style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+<h2 style="margin: 0; font-size: 30px; font-weight: 700"><span class="ar">وش تبحث عنه؟</span><span class="en lat">What are you looking for?</span></h2>
+<div class="seg">
+<div class="knob"></div>
+<button data-act="seek"><span class="ar">أبحث عن وظيفة</span><span class="en lat">I want a job</span></button>
+<button data-act="hire"><span class="ar">أبحث عن موظفين</span><span class="en lat">I'm hiring</span></button>
+</div>
+</div>
+
+<div class="aud aud-seek">
+<div class="grid3">
+<div class="card"><div class="ic" style="background: #f1edf8; color: #7a5fa0"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></div><strong><span class="ar">وظائف قريبة منك</span><span class="en lat">Jobs near you</span></strong><span style="color: #6e6a75; font-size: 14px; line-height: 1.8"><span class="ar">شوف الوظائف في مدينتك وقطاعك المفضل.</span><span class="en lat">Browse jobs in your city and sector.</span></span></div>
+<div class="card"><div class="ic" style="background: #f1edf8; color: #7a5fa0"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"></path></svg></div><strong><span class="ar">تقديم بضغطة</span><span class="en lat">One-tap apply</span></strong><span style="color: #6e6a75; font-size: 14px; line-height: 1.8"><span class="ar">ملفك جاهز، قدّم على أي وظيفة بثانية.</span><span class="en lat">Your profile is ready, apply in a second.</span></span></div>
+<div class="card"><div class="ic" style="background: #f1edf8; color: #7a5fa0"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c.8-3.5 3.2-5 6-5s5.2 1.5 6 5M15 15c2.5 0 4.5 1.3 5.5 4"></path></svg></div><strong><span class="ar">للسعوديين والمقيمين</span><span class="en lat">Saudis and residents</span></strong><span style="color: #6e6a75; font-size: 14px; line-height: 1.8"><span class="ar">فرص للجميع داخل المملكة.</span><span class="en lat">Opportunities for everyone in the Kingdom.</span></span></div>
+</div>
+<div class="card" style="gap: 18px">
+<strong style="font-size: 18px"><span class="ar">كيف يشتغل</span><span class="en lat">How it works</span></strong>
+<div class="step"><div class="num" style="background: #9b86c4">1</div><div><strong><span class="ar">سجّل ملفك</span><span class="en lat">Create your profile</span></strong><div style="color: #6e6a75; font-size: 14px"><span class="ar">رقمك وخبرتك والمدينة اللي تبيها.</span><span class="en lat">Your number, experience and city.</span></span></div></div></div>
+<div class="step"><div class="num" style="background: #8a72b4">2</div><div><strong><span class="ar">تصفّح وقدّم</span><span class="en lat">Browse and apply</span></strong><div style="color: #6e6a75; font-size: 14px"><span class="ar">اختر الوظيفة اللي تناسبك.</span><span class="en lat">Pick the job that fits you.</span></span></div></div></div>
+<div class="step"><div class="num" style="background: #0f6b3c">3</div><div><strong><span class="ar">تواصل مع صاحب العمل</span><span class="en lat">Talk to the employer</span></strong><div style="color: #6e6a75; font-size: 14px"><span class="ar">مباشرة من التطبيق.</span><span class="en lat">Directly in the app.</span></span></div></div></div>
+</div>
+</div>
+
+<div class="aud aud-hire">
+<div class="grid3">
+<div class="card"><div class="ic" style="background: #e6f1ea; color: #0f6b3c"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v4l3 2"></path></svg></div><strong><span class="ar">انشر خلال دقيقة</span><span class="en lat">Post in a minute</span></strong><span style="color: #6e6a75; font-size: 14px; line-height: 1.8"><span class="ar">اكتب الوظيفة والموقع والدوام، وخلاص.</span><span class="en lat">Role, location, shift, done.</span></span></div>
+<div class="card"><div class="ic" style="background: #e6f1ea; color: #0f6b3c"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"></path></svg></div><strong><span class="ar">مرشحين مناسبين</span><span class="en lat">Relevant candidates</span></strong><span style="color: #6e6a75; font-size: 14px; line-height: 1.8"><span class="ar">ملفات واضحة تختصر عليك الوقت.</span><span class="en lat">Clear profiles that save you time.</span></span></div>
+<div class="card"><div class="ic" style="background: #e6f1ea; color: #0f6b3c"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"></path></svg></div><strong><span class="ar">تواصل مباشر</span><span class="en lat">Direct contact</span></strong><span style="color: #6e6a75; font-size: 14px; line-height: 1.8"><span class="ar">كلّم المرشح بدون وسيط.</span><span class="en lat">Reach candidates with no middleman.</span></span></div>
+</div>
+<div class="card" style="gap: 18px">
+<strong style="font-size: 18px"><span class="ar">كيف يشتغل</span><span class="en lat">How it works</span></strong>
+<div class="step"><div class="num" style="background: #0f6b3c">1</div><div><strong><span class="ar">أنشئ حساب منشأتك</span><span class="en lat">Create your business account</span></strong><div style="color: #6e6a75; font-size: 14px"><span class="ar">اسم المحل والمدينة.</span><span class="en lat">Business name and city.</span></span></div></div></div>
+<div class="step"><div class="num" style="background: #2b7d55">2</div><div><strong><span class="ar">انشر الوظيفة</span><span class="en lat">Post the job</span></strong><div style="color: #6e6a75; font-size: 14px"><span class="ar">المسمى والدوام والتفاصيل.</span><span class="en lat">Title, shift and details.</span></span></div></div></div>
+<div class="step"><div class="num" style="background: #9b86c4">3</div><div><strong><span class="ar">اختر وتواصل</span><span class="en lat">Choose and connect</span></strong><div style="color: #6e6a75; font-size: 14px"><span class="ar">راجع المتقدمين وكلّم الأنسب.</span><span class="en lat">Review applicants and contact the best fit.</span></span></div></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="padding: 10px 0 70px; overflow: hidden">
+<div data-reveal="1" class="reveal wrap" style="text-align: center; margin-bottom: 20px"><h2 style="margin: 0; font-size: 26px; font-weight: 700"><span class="ar">للقطاعات اللي تحتاج ناس كل يوم</span><span class="en lat">Built for businesses hiring every day</span></h2></div>
+<div class="track">
+<div class="sec"><svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M16 3c-2 0-3 3-3 6s1 4 3 4v8"></path></svg><span class="ar">مطاعم</span><span class="en lat">Restaurants</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2.5 2.5 0 0 1 0 5h-2M8 3v3M12 3v3"></path></svg><span class="ar">كافيهات</span><span class="en lat">Cafes</span></div><div class="sec"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M8.5 7.5L20 18M8.5 16.5L20 6"></path></svg><span class="ar">صالونات</span><span class="en lat">Salons</span></div><div class="sec"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"></circle><path d="M12 11v10M12 16c-3 0-5-2-5-4M12 18c3 0 5-2 5-4"></path></svg><span class="ar">محلات ورد</span><span class="en lat">Flower shops</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M12 8V6M10 6h4"></path></svg><span class="ar">ضيافة</span><span class="en lat">Hospitality</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"></path></svg><span class="ar">محلات تجزئة</span><span class="en lat">Retail</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M3 19v-8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"></path><path d="M3 19h18v-4a2 2 0 0 0-2-2h-6"></path><path d="M3 19v2M21 19v2"></path></svg><span class="ar">فنادق</span><span class="en lat">Hotels</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M12 21c-4 0-7-3-7-7 0-5 7-11 7-11s7 6 7 11c0 4-3 7-7 7z"></path></svg><span class="ar">سبا</span><span class="en lat">Spa</span></div><div class="sec"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M4 12h16M12 8v12"></path></svg><span class="ar">توصيل الطلبات</span><span class="en lat">Delivery</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M16 3c-2 0-3 3-3 6s1 4 3 4v8"></path></svg><span class="ar">مطاعم</span><span class="en lat">Restaurants</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2.5 2.5 0 0 1 0 5h-2M8 3v3M12 3v3"></path></svg><span class="ar">كافيهات</span><span class="en lat">Cafes</span></div><div class="sec"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M8.5 7.5L20 18M8.5 16.5L20 6"></path></svg><span class="ar">صالونات</span><span class="en lat">Salons</span></div><div class="sec"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"></circle><path d="M12 11v10M12 16c-3 0-5-2-5-4M12 18c3 0 5-2 5-4"></path></svg><span class="ar">محلات ورد</span><span class="en lat">Flower shops</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M12 8V6M10 6h4"></path></svg><span class="ar">ضيافة</span><span class="en lat">Hospitality</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"></path></svg><span class="ar">محلات تجزئة</span><span class="en lat">Retail</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M3 19v-8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"></path><path d="M3 19h18v-4a2 2 0 0 0-2-2h-6"></path><path d="M3 19v2M21 19v2"></path></svg><span class="ar">فنادق</span><span class="en lat">Hotels</span></div><div class="sec"><svg viewBox="0 0 24 24"><path d="M12 21c-4 0-7-3-7-7 0-5 7-11 7-11s7 6 7 11c0 4-3 7-7 7z"></path></svg><span class="ar">سبا</span><span class="en lat">Spa</span></div><div class="sec"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M4 12h16M12 8v12"></path></svg><span class="ar">توصيل الطلبات</span><span class="en lat">Delivery</span></div>
+</div>
+</section>
+
+<section style="padding: 10px 0 70px">
+<div class="wrap grid2">
+<div data-reveal="1" class="reveal" style="display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 28px; font-weight: 700; line-height: 1.4"><span class="ar">عندك سؤال؟<br><span class="grad">كلمنا على واتساب</span></span><span class="en lat">Got a question?<br><span class="grad">Message us on WhatsApp</span></span></h2>
+<p style="margin: 0; color: #6e6a75; line-height: 1.85"><span class="ar">نرد عليك بسرعة، سواء كنت تبحث عن وظيفة أو تبي موظفين.</span><span class="en lat">We reply fast, whether you're job hunting or hiring.</span></p>
+<a href="https://wa.me/966558313972" class="btnp" style="align-self: flex-start; background: #25d366; box-shadow: 0 10px 24px rgba(37,211,102,.3)"><span class="ar">ابدأ المحادثة</span><span class="en lat">Start chat</span></a>
+</div>
+<div data-reveal="1" class="reveal chat">
+<div class="bub me b1"><span class="ar">السلام عليكم، أبي كاشير لكوفي في الدمام</span><span class="en lat">Hi, I need a cashier for a cafe in Dammam</span></div>
+<div class="bub them typing"><i></i><i></i><i></i></div>
+<div class="bub them b2"><span class="ar">هلا والله! تقدر تنشر الوظيفة من التطبيق خلال دقيقة، وتوصلك الطلبات مباشرة.</span><span class="en lat">Welcome! Post the job in the app in a minute and get applications directly.</span></div>
+<div class="bub me b3"><span class="ar">ممتاز، يعطيك العافية</span><span class="en lat">Great, thanks</span></div>
+</div>
+</div>
+</section>
+
+<section id="download" data-reveal="1" class="reveal" style="padding: 10px 0 70px">
+<div class="wrap">
+<div style="position: relative; overflow: hidden; border-radius: 32px; background: linear-gradient(120deg, #9b86c4, #6d5596 55%, #0f6b3c); color: #fff; padding: 40px 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px">
+<div class="deco" style="width: 300px; height: 300px; border-color: rgba(255,255,255,.18); top: -120px; inset-inline-start: -80px"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 14px; max-width: 460px">
+<h2 style="margin: 0; font-size: 30px; font-weight: 700; line-height: 1.35"><span class="ar">حمّل سبونسر لينك<br>وابدأ اليوم</span><span class="en lat">Download SponsorLink<br>and start today</span></h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="https://sponsorlink.app/download" class="lat" style="display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 14px; background: #111; color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"></rect><path d="M11 18h2"></path></svg><span style="display: flex; flex-direction: column; line-height: 1.2"><small style="font-size: 10px; opacity: .8">Download on the</small><strong>App Store</strong></span></a>
+<a href="https://sponsorlink.app/download" class="lat" style="display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 14px; background: #111; color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3l13 9-13 9z"></path></svg><span style="display: flex; flex-direction: column; line-height: 1.2"><small style="font-size: 10px; opacity: .8">Get it on</small><strong>Google Play</strong></span></a>
+</div>
+</div>
+<div style="position: relative; background: #fff; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<svg class="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" aria-label="QR sponsorlink.app/download" role="img"><rect x="0" y="0" width="1" height="1" style="animation-delay:0.00s"></rect><rect x="1" y="0" width="1" height="1" style="animation-delay:0.03s"></rect><rect x="2" y="0" width="1" height="1" style="animation-delay:0.05s"></rect><rect x="3" y="0" width="1" height="1" style="animation-delay:0.08s"></rect><rect x="4" y="0" width="1" height="1" style="animation-delay:0.10s"></rect><rect x="5" y="0" width="1" height="1" style="animation-delay:0.12s"></rect><rect x="6" y="0" width="1" height="1" style="animation-delay:0.15s"></rect><rect x="8" y="0" width="1" height="1" style="animation-delay:0.20s"></rect><rect x="11" y="0" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="12" y="0" width="1" height="1" style="animation-delay:0.30s"></rect><rect x="13" y="0" width="1" height="1" style="animation-delay:0.33s"></rect><rect x="14" y="0" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="15" y="0" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="19" y="0" width="1" height="1" style="animation-delay:0.48s"></rect><rect x="20" y="0" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="22" y="0" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="23" y="0" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="24" y="0" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="25" y="0" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="26" y="0" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="27" y="0" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="28" y="0" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="0" y="1" width="1" height="1" style="animation-delay:0.03s"></rect><rect x="6" y="1" width="1" height="1" style="animation-delay:0.18s"></rect><rect x="8" y="1" width="1" height="1" style="animation-delay:0.23s"></rect><rect x="13" y="1" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="16" y="1" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="17" y="1" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="20" y="1" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="22" y="1" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="28" y="1" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="0" y="2" width="1" height="1" style="animation-delay:0.05s"></rect><rect x="2" y="2" width="1" height="1" style="animation-delay:0.10s"></rect><rect x="3" y="2" width="1" height="1" style="animation-delay:0.12s"></rect><rect x="4" y="2" width="1" height="1" style="animation-delay:0.15s"></rect><rect x="6" y="2" width="1" height="1" style="animation-delay:0.20s"></rect><rect x="9" y="2" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="11" y="2" width="1" height="1" style="animation-delay:0.33s"></rect><rect x="16" y="2" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="19" y="2" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="22" y="2" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="24" y="2" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="25" y="2" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="26" y="2" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="28" y="2" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="0" y="3" width="1" height="1" style="animation-delay:0.08s"></rect><rect x="2" y="3" width="1" height="1" style="animation-delay:0.12s"></rect><rect x="3" y="3" width="1" height="1" style="animation-delay:0.15s"></rect><rect x="4" y="3" width="1" height="1" style="animation-delay:0.18s"></rect><rect x="6" y="3" width="1" height="1" style="animation-delay:0.23s"></rect><rect x="8" y="3" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="9" y="3" width="1" height="1" style="animation-delay:0.30s"></rect><rect x="11" y="3" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="14" y="3" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="15" y="3" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="17" y="3" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="18" y="3" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="20" y="3" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="22" y="3" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="24" y="3" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="25" y="3" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="26" y="3" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="28" y="3" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="0" y="4" width="1" height="1" style="animation-delay:0.10s"></rect><rect x="2" y="4" width="1" height="1" style="animation-delay:0.15s"></rect><rect x="3" y="4" width="1" height="1" style="animation-delay:0.18s"></rect><rect x="4" y="4" width="1" height="1" style="animation-delay:0.20s"></rect><rect x="6" y="4" width="1" height="1" style="animation-delay:0.25s"></rect><rect x="9" y="4" width="1" height="1" style="animation-delay:0.33s"></rect><rect x="10" y="4" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="12" y="4" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="14" y="4" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="16" y="4" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="19" y="4" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="22" y="4" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="24" y="4" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="25" y="4" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="26" y="4" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="28" y="4" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="0" y="5" width="1" height="1" style="animation-delay:0.12s"></rect><rect x="6" y="5" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="9" y="5" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="10" y="5" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="11" y="5" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="13" y="5" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="15" y="5" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="16" y="5" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="17" y="5" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="18" y="5" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="19" y="5" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="20" y="5" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="22" y="5" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="28" y="5" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="0" y="6" width="1" height="1" style="animation-delay:0.15s"></rect><rect x="1" y="6" width="1" height="1" style="animation-delay:0.18s"></rect><rect x="2" y="6" width="1" height="1" style="animation-delay:0.20s"></rect><rect x="3" y="6" width="1" height="1" style="animation-delay:0.23s"></rect><rect x="4" y="6" width="1" height="1" style="animation-delay:0.25s"></rect><rect x="5" y="6" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="6" y="6" width="1" height="1" style="animation-delay:0.30s"></rect><rect x="8" y="6" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="10" y="6" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="12" y="6" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="14" y="6" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="16" y="6" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="18" y="6" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="20" y="6" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="22" y="6" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="23" y="6" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="24" y="6" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="25" y="6" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="26" y="6" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="27" y="6" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="28" y="6" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="8" y="7" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="9" y="7" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="15" y="7" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="16" y="7" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="17" y="7" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="18" y="7" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="20" y="7" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="0" y="8" width="1" height="1" style="animation-delay:0.20s"></rect><rect x="2" y="8" width="1" height="1" style="animation-delay:0.25s"></rect><rect x="3" y="8" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="5" y="8" width="1" height="1" style="animation-delay:0.33s"></rect><rect x="6" y="8" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="7" y="8" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="10" y="8" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="13" y="8" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="15" y="8" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="17" y="8" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="18" y="8" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="19" y="8" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="22" y="8" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="25" y="8" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="27" y="8" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="28" y="8" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="0" y="9" width="1" height="1" style="animation-delay:0.23s"></rect><rect x="3" y="9" width="1" height="1" style="animation-delay:0.30s"></rect><rect x="8" y="9" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="13" y="9" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="14" y="9" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="15" y="9" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="18" y="9" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="19" y="9" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="20" y="9" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="22" y="9" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="23" y="9" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="24" y="9" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="28" y="9" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="0" y="10" width="1" height="1" style="animation-delay:0.25s"></rect><rect x="1" y="10" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="2" y="10" width="1" height="1" style="animation-delay:0.30s"></rect><rect x="3" y="10" width="1" height="1" style="animation-delay:0.33s"></rect><rect x="4" y="10" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="6" y="10" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="7" y="10" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="11" y="10" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="13" y="10" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="16" y="10" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="17" y="10" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="18" y="10" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="20" y="10" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="23" y="10" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="24" y="10" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="26" y="10" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="27" y="10" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="0" y="11" width="1" height="1" style="animation-delay:0.28s"></rect><rect x="4" y="11" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="12" y="11" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="16" y="11" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="20" y="11" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="21" y="11" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="23" y="11" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="24" y="11" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="28" y="11" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="3" y="12" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="4" y="12" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="5" y="12" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="6" y="12" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="8" y="12" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="10" y="12" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="14" y="12" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="15" y="12" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="17" y="12" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="19" y="12" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="25" y="12" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="26" y="12" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="0" y="13" width="1" height="1" style="animation-delay:0.33s"></rect><rect x="2" y="13" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="3" y="13" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="4" y="13" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="5" y="13" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="7" y="13" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="10" y="13" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="11" y="13" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="14" y="13" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="16" y="13" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="19" y="13" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="20" y="13" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="22" y="13" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="26" y="13" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="27" y="13" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="28" y="13" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="0" y="14" width="1" height="1" style="animation-delay:0.35s"></rect><rect x="1" y="14" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="2" y="14" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="3" y="14" width="1" height="1" style="animation-delay:0.43s"></rect><rect x="4" y="14" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="5" y="14" width="1" height="1" style="animation-delay:0.48s"></rect><rect x="6" y="14" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="9" y="14" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="13" y="14" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="15" y="14" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="16" y="14" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="17" y="14" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="18" y="14" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="19" y="14" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="20" y="14" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="21" y="14" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="23" y="14" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="24" y="14" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="26" y="14" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="27" y="14" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="28" y="14" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="0" y="15" width="1" height="1" style="animation-delay:0.38s"></rect><rect x="1" y="15" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="7" y="15" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="8" y="15" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="9" y="15" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="14" y="15" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="16" y="15" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="19" y="15" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="22" y="15" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="23" y="15" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="27" y="15" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="0" y="16" width="1" height="1" style="animation-delay:0.40s"></rect><rect x="2" y="16" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="3" y="16" width="1" height="1" style="animation-delay:0.48s"></rect><rect x="4" y="16" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="6" y="16" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="8" y="16" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="10" y="16" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="11" y="16" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="14" y="16" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="15" y="16" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="18" y="16" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="19" y="16" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="20" y="16" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="21" y="16" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="23" y="16" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="24" y="16" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="25" y="16" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="27" y="16" width="1" height="1" style="animation-delay:1.07s"></rect><rect x="1" y="17" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="4" y="17" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="9" y="17" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="14" y="17" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="16" y="17" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="18" y="17" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="20" y="17" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="21" y="17" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="23" y="17" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="25" y="17" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="26" y="17" width="1" height="1" style="animation-delay:1.07s"></rect><rect x="27" y="17" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="0" y="18" width="1" height="1" style="animation-delay:0.45s"></rect><rect x="2" y="18" width="1" height="1" style="animation-delay:0.50s"></rect><rect x="3" y="18" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="5" y="18" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="6" y="18" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="10" y="18" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="11" y="18" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="13" y="18" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="14" y="18" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="15" y="18" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="17" y="18" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="21" y="18" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="24" y="18" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="26" y="18" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="2" y="19" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="4" y="19" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="7" y="19" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="9" y="19" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="11" y="19" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="13" y="19" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="14" y="19" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="16" y="19" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="17" y="19" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="18" y="19" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="19" y="19" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="22" y="19" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="23" y="19" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="26" y="19" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="1" y="20" width="1" height="1" style="animation-delay:0.53s"></rect><rect x="2" y="20" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="5" y="20" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="6" y="20" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="8" y="20" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="9" y="20" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="10" y="20" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="11" y="20" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="13" y="20" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="14" y="20" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="16" y="20" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="17" y="20" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="18" y="20" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="20" y="20" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="21" y="20" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="22" y="20" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="23" y="20" width="1" height="1" style="animation-delay:1.07s"></rect><rect x="24" y="20" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="25" y="20" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="26" y="20" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="8" y="21" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="12" y="21" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="16" y="21" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="17" y="21" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="18" y="21" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="20" y="21" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="24" y="21" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="25" y="21" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="26" y="21" width="1" height="1" style="animation-delay:1.18s"></rect><rect x="27" y="21" width="1" height="1" style="animation-delay:1.20s"></rect><rect x="28" y="21" width="1" height="1" style="animation-delay:1.23s"></rect><rect x="0" y="22" width="1" height="1" style="animation-delay:0.55s"></rect><rect x="1" y="22" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="2" y="22" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="3" y="22" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="4" y="22" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="5" y="22" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="6" y="22" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="8" y="22" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="11" y="22" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="14" y="22" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="16" y="22" width="1" height="1" style="animation-delay:0.95s"></rect><rect x="18" y="22" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="19" y="22" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="20" y="22" width="1" height="1" style="animation-delay:1.05s"></rect><rect x="22" y="22" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="24" y="22" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="25" y="22" width="1" height="1" style="animation-delay:1.18s"></rect><rect x="27" y="22" width="1" height="1" style="animation-delay:1.23s"></rect><rect x="0" y="23" width="1" height="1" style="animation-delay:0.58s"></rect><rect x="6" y="23" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="8" y="23" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="9" y="23" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="13" y="23" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="14" y="23" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="16" y="23" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="20" y="23" width="1" height="1" style="animation-delay:1.07s"></rect><rect x="24" y="23" width="1" height="1" style="animation-delay:1.18s"></rect><rect x="25" y="23" width="1" height="1" style="animation-delay:1.20s"></rect><rect x="28" y="23" width="1" height="1" style="animation-delay:1.28s"></rect><rect x="0" y="24" width="1" height="1" style="animation-delay:0.60s"></rect><rect x="2" y="24" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="3" y="24" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="4" y="24" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="6" y="24" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="12" y="24" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="15" y="24" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="17" y="24" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="20" y="24" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="21" y="24" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="22" y="24" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="23" y="24" width="1" height="1" style="animation-delay:1.18s"></rect><rect x="24" y="24" width="1" height="1" style="animation-delay:1.20s"></rect><rect x="26" y="24" width="1" height="1" style="animation-delay:1.25s"></rect><rect x="27" y="24" width="1" height="1" style="animation-delay:1.28s"></rect><rect x="0" y="25" width="1" height="1" style="animation-delay:0.62s"></rect><rect x="2" y="25" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="3" y="25" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="4" y="25" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="6" y="25" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="8" y="25" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="9" y="25" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="11" y="25" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="12" y="25" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="15" y="25" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="16" y="25" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="19" y="25" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="20" y="25" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="21" y="25" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="24" y="25" width="1" height="1" style="animation-delay:1.23s"></rect><rect x="25" y="25" width="1" height="1" style="animation-delay:1.25s"></rect><rect x="28" y="25" width="1" height="1" style="animation-delay:1.33s"></rect><rect x="0" y="26" width="1" height="1" style="animation-delay:0.65s"></rect><rect x="2" y="26" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="3" y="26" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="4" y="26" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="6" y="26" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="8" y="26" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="9" y="26" width="1" height="1" style="animation-delay:0.88s"></rect><rect x="10" y="26" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="14" y="26" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="18" y="26" width="1" height="1" style="animation-delay:1.10s"></rect><rect x="19" y="26" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="20" y="26" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="23" y="26" width="1" height="1" style="animation-delay:1.23s"></rect><rect x="26" y="26" width="1" height="1" style="animation-delay:1.30s"></rect><rect x="28" y="26" width="1" height="1" style="animation-delay:1.35s"></rect><rect x="0" y="27" width="1" height="1" style="animation-delay:0.68s"></rect><rect x="6" y="27" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="9" y="27" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="10" y="27" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="12" y="27" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="14" y="27" width="1" height="1" style="animation-delay:1.03s"></rect><rect x="16" y="27" width="1" height="1" style="animation-delay:1.07s"></rect><rect x="18" y="27" width="1" height="1" style="animation-delay:1.12s"></rect><rect x="20" y="27" width="1" height="1" style="animation-delay:1.18s"></rect><rect x="22" y="27" width="1" height="1" style="animation-delay:1.23s"></rect><rect x="23" y="27" width="1" height="1" style="animation-delay:1.25s"></rect><rect x="25" y="27" width="1" height="1" style="animation-delay:1.30s"></rect><rect x="27" y="27" width="1" height="1" style="animation-delay:1.35s"></rect><rect x="0" y="28" width="1" height="1" style="animation-delay:0.70s"></rect><rect x="1" y="28" width="1" height="1" style="animation-delay:0.73s"></rect><rect x="2" y="28" width="1" height="1" style="animation-delay:0.75s"></rect><rect x="3" y="28" width="1" height="1" style="animation-delay:0.78s"></rect><rect x="4" y="28" width="1" height="1" style="animation-delay:0.80s"></rect><rect x="5" y="28" width="1" height="1" style="animation-delay:0.83s"></rect><rect x="6" y="28" width="1" height="1" style="animation-delay:0.85s"></rect><rect x="8" y="28" width="1" height="1" style="animation-delay:0.90s"></rect><rect x="9" y="28" width="1" height="1" style="animation-delay:0.93s"></rect><rect x="11" y="28" width="1" height="1" style="animation-delay:0.98s"></rect><rect x="12" y="28" width="1" height="1" style="animation-delay:1.00s"></rect><rect x="15" y="28" width="1" height="1" style="animation-delay:1.07s"></rect><rect x="18" y="28" width="1" height="1" style="animation-delay:1.15s"></rect><rect x="19" y="28" width="1" height="1" style="animation-delay:1.18s"></rect><rect x="20" y="28" width="1" height="1" style="animation-delay:1.20s"></rect><rect x="23" y="28" width="1" height="1" style="animation-delay:1.28s"></rect><rect x="25" y="28" width="1" height="1" style="animation-delay:1.33s"></rect><rect x="27" y="28" width="1" height="1" style="animation-delay:1.38s"></rect></svg>
+<span style="font-size: 12px; color: #6e6a75"><span class="ar">امسح الكود بجوالك</span><span class="en lat">Scan with your phone</span></span>
+</div>
+</div>
+</div>
+</section>
+
+<section style="padding: 10px 0 70px">
+<div class="wrap" style="max-width: 720px; display: flex; flex-direction: column; gap: 12px">
+<h2 data-reveal="1" class="reveal" style="margin: 0 0 8px; font-size: 26px; font-weight: 700; text-align: center"><span class="ar">أسئلة شائعة</span><span class="en lat">FAQ</span></h2>
+<details><summary><span><span class="ar">لمن التطبيق؟</span><span class="en lat">Who is the app for?</span></span><span class="pm">+</span></summary><p><span class="ar">للباحثين عن عمل داخل المملكة أو خارجها اللي يبون ينتقلون للعمل فيها، ولأصحاب المنشآت اللي يبون موظفين، خصوصًا في المطاعم والكافيهات والصالونات والمحلات.</span><span class="en lat">For job seekers inside the Kingdom or abroad looking to relocate for work, and for businesses hiring, especially restaurants, cafes, salons and shops.</span></p></details>
+<details><summary><span><span class="ar">هل يشمل المقيمين؟</span><span class="en lat">Are residents included?</span></span><span class="pm">+</span></summary><p><span class="ar">نعم، التطبيق للسعوديين والمقيمين داخل المملكة.</span><span class="en lat">Yes, it's for Saudis and residents in the Kingdom.</span></p></details>
+<details><summary><span><span class="ar">كيف أتواصل معكم؟</span><span class="en lat">How do I contact you?</span></span><span class="pm">+</span></summary><p><span class="ar">من زر الواتساب في الصفحة، أو من <a href="https://sponsorlink.app/support.html" style="color: #7a5fa0; text-decoration: underline">صفحة الدعم</a>.</span><span class="en lat">Via the WhatsApp button on this page, or our <a href="https://sponsorlink.app/support.html" style="color: #7a5fa0; text-decoration: underline">support page</a>.</span></p></details>
+</div>
+</section>
+
+<footer style="border-top: 1px solid rgba(35,32,43,.06); padding: 30px 0 90px">
+<div class="wrap" style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+<span class="lat grad" style="font-size: 22px; font-weight: 800">SponsorLink</span>
+<div style="display: flex; gap: 10px">
+<a href="https://instagram.com/sponsorlink_ksa" aria-label="Instagram" class="soc"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".8"></circle></svg></a>
+<a href="https://x.com/sponsorlink_ksa" aria-label="X" class="soc"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"></path></svg></a>
+<a href="https://facebook.com/share/1CPXsTEzfU" aria-label="Facebook" class="soc"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"></path></svg></a>
+<a href="https://wa.me/966558313972" aria-label="WhatsApp" class="soc"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg></a>
+</div>
+<div style="display: flex; gap: 18px; font-size: 14px; color: #6e6a75"><a href="https://sponsorlink.app/privacy.html"><span class="ar">سياسة الخصوصية</span><span class="en lat">Privacy</span></a><a href="https://sponsorlink.app/terms.html"><span class="ar">الشروط والأحكام</span><span class="en lat">Terms of Service</span></a><a href="https://sponsorlink.app/support.html"><span class="ar">الدعم</span><span class="en lat">Support</span></a></div>
+<span style="font-size: 12px; color: #9a95a3"><span class="ar">مؤسسة سبونسورلينك — المملكة العربية السعودية</span><span class="en lat">SponsorLink Establishment — Kingdom of Saudi Arabia</span></span>
+</div>
+</footer>
+
+<a href="https://wa.me/966558313972" class="wa" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z"></path></svg></a>
+
+</div>
+
 <script>
-function setLang(lang) {
-  document.body.className = lang;
-  document.getElementById('lang-en').className = lang === 'en' ? 'active' : '';
-  document.getElementById('lang-ar').className = lang === 'ar' ? 'active' : '';
-  document.documentElement.lang = lang;
+(function(){
+const getRoot = () => this.root || document.querySelector('[data-sl-root]');
+this.onClick = (e) => {
+const r = getRoot(); if (!r) return;
+const b = e.target.closest('[data-act]'); if (!b || !r.contains(b)) return;
+const act = b.dataset.act;
+if (act === 'lang') {
+const en = r.dataset.lang === 'ar';
+r.dataset.lang = en ? 'en' : 'ar';
+r.setAttribute('dir', en ? 'ltr' : 'rtl');
+r.style.opacity = '0.35'; requestAnimationFrame(() => { r.style.transition = 'opacity .35s ease'; r.style.opacity = '1'; });
 }
-(function() {
-  var browserLang = (navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
-  setLang(browserLang);
-})();
+if (act === 'seek' || act === 'hire') {
+if (r.dataset.aud === act) return;
+r.dataset.aud = act;
+const box = r.querySelector('.aud-' + act);
+if (box) { box.classList.remove('aud-in'); void box.offsetWidth; box.classList.add('aud-in'); }
+}
+};
+document.addEventListener('click', this.onClick);
+const tick = () => {
+this.raf = requestAnimationFrame(tick);
+const r = getRoot(); if (!r) return;
+const vh = window.innerHeight || 800;
+r.querySelectorAll('[data-reveal]').forEach((el) => {
+if (el.dataset.on === '1') return;
+const bb = el.getBoundingClientRect();
+if (bb.top < vh * 0.82 && bb.bottom > 0) el.dataset.on = '1';
+});
+};
+tick();
+
+}).call({});
 </script>
 </body>
 </html>
